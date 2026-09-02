@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CB40AE3A18E750320309020 /* ConverterBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4541F3A42FB798EE9A79AB5 /* ConverterBoard.swift */; };
+		0D8D6C42ED3E16BE949A2C3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A9D4913CE84CA7CD66E8BC /* Main.storyboard */; };
+		146D8E926B38549F623CE3A4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288213E653E579CBEA546EA /* Theme.swift */; };
+		1A9F6D2E4C8B47A1B305E6F2 /* StatsBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E41C9082AF4D6BB19E3C04 /* StatsBoard.swift */; };
+		2EB6BC956CE676A4587195F1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3996543BCCD65DEC802C9CE0 /* PrivacyInfo.xcprivacy */; };
+		3DC13399CAED1AE2F6FD1947 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C103C6E6D42396940C43C351 /* SceneDelegate.swift */; };
+		44FA8BA546349D2DA8AB91C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3BDC432836D065726F4A728 /* Assets.xcassets */; };
+		459A1700534521A8687891A4 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E9AA77822732973B78603 /* AppLinks.swift */; };
+		467A0B7A9335329906AD22EF /* StudioBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AE3D1711430BC1356B52A /* StudioBoard.swift */; };
+		87193F7D2F666775C3EC7BDD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5315AE45C37337CF2260C17 /* SettingsView.swift */; };
+		8D8081DEF9746C956B4C915D /* CaptureBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9C1AF75F775ED125A185E /* CaptureBoard.swift */; };
+		97D20296FA2DC9E19F381A07 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98F131C920F838AA3045B7 /* Store.swift */; };
+		AFB16DFEEA82C8CA77DAADC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C88604FCE84B502B7530FB /* AppDelegate.swift */; };
+		D19FE775C97635015DF1A0B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E03B00CADCFFAEE7927A007 /* ContentView.swift */; };
+		D456DFFC482F250BD28F32E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 599DE7A0C480F65FBF415E32 /* LaunchScreen.storyboard */; };
+		EC629FB379946D75114FFF6D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488FB5C226502108132899D /* Models.swift */; };
+		FA78D3E65EE847D61A7FF0E2 /* ColorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036F14E44552128598F4E48E /* ColorMath.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		025E9AA77822732973B78603 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
+		036F14E44552128598F4E48E /* ColorMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMath.swift; sourceTree = "<group>"; };
+		09A9D4913CE84CA7CD66E8BC /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2288213E653E579CBEA546EA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		22E9C1AF75F775ED125A185E /* CaptureBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureBoard.swift; sourceTree = "<group>"; };
+		242E72F0AE54AA925F418428 /* Pods-MetrivoxControlHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetrivoxControlHub.debug.xcconfig"; path = "Target Support Files/Pods-MetrivoxControlHub/Pods-MetrivoxControlHub.debug.xcconfig"; sourceTree = "<group>"; };
+		3996543BCCD65DEC802C9CE0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		4488FB5C226502108132899D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		478AE3D1711430BC1356B52A /* StudioBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioBoard.swift; sourceTree = "<group>"; };
+		4D98F131C920F838AA3045B7 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		552EA3082681BFD816EC665B /* Pods-MetrivoxControlHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetrivoxControlHub.release.xcconfig"; path = "Target Support Files/Pods-MetrivoxControlHub/Pods-MetrivoxControlHub.release.xcconfig"; sourceTree = "<group>"; };
+		599DE7A0C480F65FBF415E32 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6E03B00CADCFFAEE7927A007 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9429050AB8CC3D8B5CE045D1 /* MetrivoxControlHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetrivoxControlHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5315AE45C37337CF2260C17 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B7E41C9082AF4D6BB19E3C04 /* StatsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBoard.swift; sourceTree = "<group>"; };
+		C0C88604FCE84B502B7530FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C103C6E6D42396940C43C351 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CAFD1265C611D5F29668B8D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3BDC432836D065726F4A728 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4512483F0A6167892CAB9F0 /* Pods_MetrivoxControlHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MetrivoxControlHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4541F3A42FB798EE9A79AB5 /* ConverterBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterBoard.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6719073F6A0EACAA3A533243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24EEBB8C778B857A605C0356 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22E9C1AF75F775ED125A185E /* CaptureBoard.swift */,
+				6E03B00CADCFFAEE7927A007 /* ContentView.swift */,
+				F4541F3A42FB798EE9A79AB5 /* ConverterBoard.swift */,
+				A5315AE45C37337CF2260C17 /* SettingsView.swift */,
+				B7E41C9082AF4D6BB19E3C04 /* StatsBoard.swift */,
+				478AE3D1711430BC1356B52A /* StudioBoard.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		343728CFA5EFF8F15B69CE3B /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				025E9AA77822732973B78603 /* AppLinks.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		35DC3FBEDBDA2CF9EDA4EE57 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4488FB5C226502108132899D /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5501FAA4926D9BF3D3C645E3 = {
+			isa = PBXGroup;
+			children = (
+				D54005C45984748FD8B95C2D /* MetrivoxControlHub */,
+				6A3CA3E11C06F60429DC4343 /* Products */,
+				CCA4C0F4A628A9DC580E3C2F /* Pods */,
+				F5DCE0FC8E65F8B0185540E1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		59796CB8F27C4B064ECCB229 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				036F14E44552128598F4E48E /* ColorMath.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5E339A0376B8EC73336857B9 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				2288213E653E579CBEA546EA /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		6A3CA3E11C06F60429DC4343 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9429050AB8CC3D8B5CE045D1 /* MetrivoxControlHub.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9957A18D9A93BDE5FD7D7F3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDC432836D065726F4A728 /* Assets.xcassets */,
+				3996543BCCD65DEC802C9CE0 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CCA4C0F4A628A9DC580E3C2F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				242E72F0AE54AA925F418428 /* Pods-MetrivoxControlHub.debug.xcconfig */,
+				552EA3082681BFD816EC665B /* Pods-MetrivoxControlHub.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CDC7E1E73FD0A0AA9AC8A841 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C0C88604FCE84B502B7530FB /* AppDelegate.swift */,
+				CAFD1265C611D5F29668B8D1 /* Info.plist */,
+				599DE7A0C480F65FBF415E32 /* LaunchScreen.storyboard */,
+				09A9D4913CE84CA7CD66E8BC /* Main.storyboard */,
+				C103C6E6D42396940C43C351 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D54005C45984748FD8B95C2D /* MetrivoxControlHub */ = {
+			isa = PBXGroup;
+			children = (
+				CDC7E1E73FD0A0AA9AC8A841 /* App */,
+				35DC3FBEDBDA2CF9EDA4EE57 /* Models */,
+				343728CFA5EFF8F15B69CE3B /* Navigation */,
+				D73BCC3D538404A139F9298E /* Persistence */,
+				A9957A18D9A93BDE5FD7D7F3 /* Resources */,
+				59796CB8F27C4B064ECCB229 /* Services */,
+				5E339A0376B8EC73336857B9 /* Theme */,
+				24EEBB8C778B857A605C0356 /* Views */,
+			);
+			path = MetrivoxControlHub;
+			sourceTree = "<group>";
+		};
+		D73BCC3D538404A139F9298E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				4D98F131C920F838AA3045B7 /* Store.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		F5DCE0FC8E65F8B0185540E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4512483F0A6167892CAB9F0 /* Pods_MetrivoxControlHub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		701D837018E68CE4DEDC07D8 /* MetrivoxControlHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC0A2E55501990A899AF8ADC /* Build configuration list for PBXNativeTarget "MetrivoxControlHub" */;
+			buildPhases = (
+				17DDA424A6AE787AEEACB229 /* [CP] Check Pods Manifest.lock */,
+				68A771FD723CB83D358149A0 /* Sources */,
+				6719073F6A0EACAA3A533243 /* Frameworks */,
+				56DAB5A44A3FD882034E2DE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetrivoxControlHub;
+			productName = MetrivoxControlHub;
+			productReference = 9429050AB8CC3D8B5CE045D1 /* MetrivoxControlHub.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F835A75B376D9D12DE8D6255 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					701D837018E68CE4DEDC07D8 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 1796424EE6D02D5656C83791 /* Build configuration list for PBXProject "MetrivoxControlHub" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5501FAA4926D9BF3D3C645E3;
+			productRefGroup = 6A3CA3E11C06F60429DC4343 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				701D837018E68CE4DEDC07D8 /* MetrivoxControlHub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		56DAB5A44A3FD882034E2DE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D456DFFC482F250BD28F32E9 /* LaunchScreen.storyboard in Resources */,
+				0D8D6C42ED3E16BE949A2C3B /* Main.storyboard in Resources */,
+				44FA8BA546349D2DA8AB91C1 /* Assets.xcassets in Resources */,
+				2EB6BC956CE676A4587195F1 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17DDA424A6AE787AEEACB229 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MetrivoxControlHub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68A771FD723CB83D358149A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFB16DFEEA82C8CA77DAADC1 /* AppDelegate.swift in Sources */,
+				3DC13399CAED1AE2F6FD1947 /* SceneDelegate.swift in Sources */,
+				EC629FB379946D75114FFF6D /* Models.swift in Sources */,
+				459A1700534521A8687891A4 /* AppLinks.swift in Sources */,
+				97D20296FA2DC9E19F381A07 /* Store.swift in Sources */,
+				FA78D3E65EE847D61A7FF0E2 /* ColorMath.swift in Sources */,
+				146D8E926B38549F623CE3A4 /* Theme.swift in Sources */,
+				8D8081DEF9746C956B4C915D /* CaptureBoard.swift in Sources */,
+				D19FE775C97635015DF1A0B5 /* ContentView.swift in Sources */,
+				0CB40AE3A18E750320309020 /* ConverterBoard.swift in Sources */,
+				87193F7D2F666775C3EC7BDD /* SettingsView.swift in Sources */,
+				1A9F6D2E4C8B47A1B305E6F2 /* StatsBoard.swift in Sources */,
+				467A0B7A9335329906AD22EF /* StudioBoard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		12DCEEF3FDBC5953A1F260A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 242E72F0AE54AA925F418428 /* Pods-MetrivoxControlHub.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MetrivoxControlHub/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Metrivox Control Hub";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zal.m3tr1v0xc0ntr0lh7b;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		9A8D951EB505B49843FEE1BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CC0C3A6A57AE5E1B2583BC81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1B5BD0E625383961668D392 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 552EA3082681BFD816EC665B /* Pods-MetrivoxControlHub.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MetrivoxControlHub/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Metrivox Control Hub";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zal.m3tr1v0xc0ntr0lh7b;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1796424EE6D02D5656C83791 /* Build configuration list for PBXProject "MetrivoxControlHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC0C3A6A57AE5E1B2583BC81 /* Debug */,
+				9A8D951EB505B49843FEE1BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC0A2E55501990A899AF8ADC /* Build configuration list for PBXNativeTarget "MetrivoxControlHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12DCEEF3FDBC5953A1F260A1 /* Debug */,
+				F1B5BD0E625383961668D392 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F835A75B376D9D12DE8D6255 /* Project object */;
+}
