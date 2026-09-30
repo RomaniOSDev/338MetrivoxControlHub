@@ -139,53 +139,47 @@ enum ColorMath {
         return folded < 0 ? folded + 1 : folded
     }
 
-    static func harmony(from hex: String, kind: HarmonyKind) -> [String] {
-        guard let hsb = hsb(from: hex) else { return [] }
-        let hue = hsb.h
-        let sat = max(0.18, hsb.s)
-        let bri = max(0.22, hsb.b)
-        switch kind {
-        case .complementary:
-            return [
-                Self.hex(hue: hue, saturation: sat, brightness: bri),
-                Self.hex(hue: hue, saturation: sat, brightness: max(0.22, bri - 0.18)),
-                Self.hex(hue: wrapHue(hue + 0.5), saturation: sat, brightness: bri),
-                Self.hex(hue: wrapHue(hue + 0.5), saturation: min(1, sat + 0.08), brightness: max(0.2, bri - 0.12)),
-                Self.hex(hue: wrapHue(hue + 0.5), saturation: max(0.2, sat - 0.18), brightness: min(1, bri + 0.08))
-            ]
-        case .analogous:
-            return [-2, -1, 0, 1, 2].map { step in
-                Self.hex(hue: wrapHue(hue + Double(step) * (30.0 / 360.0)), saturation: sat, brightness: bri)
-            }
-        case .triadic:
-            return [
-                Self.hex(hue: hue, saturation: sat, brightness: bri),
-                Self.hex(hue: wrapHue(hue + 1.0 / 3.0), saturation: sat, brightness: bri),
-                Self.hex(hue: wrapHue(hue + 2.0 / 3.0), saturation: sat, brightness: bri),
-                Self.hex(hue: hue, saturation: sat, brightness: max(0.22, bri - 0.18)),
-                Self.hex(hue: wrapHue(hue + 1.0 / 3.0), saturation: max(0.2, sat - 0.12), brightness: min(1, bri + 0.06))
-            ]
-        case .split:
-            return [
-                Self.hex(hue: hue, saturation: sat, brightness: bri),
-                Self.hex(hue: wrapHue(hue + 0.5 - 1.0 / 12.0), saturation: sat, brightness: bri),
-                Self.hex(hue: wrapHue(hue + 0.5 + 1.0 / 12.0), saturation: sat, brightness: bri),
-                Self.hex(hue: wrapHue(hue + 0.5 - 1.0 / 12.0), saturation: sat, brightness: max(0.22, bri - 0.16)),
-                Self.hex(hue: wrapHue(hue + 0.5 + 1.0 / 12.0), saturation: max(0.2, sat - 0.14), brightness: bri)
-            ]
+    static func mix(_ hex: String, with tint: String, amount: Double) -> String {
+        guard let a = rgbComponents(from: hex), let b = rgbComponents(from: tint) else { return displayHex(hex) }
+        let t = min(max(amount, 0), 1)
+        return Self.hex(
+            r: Int((Double(a.r) * (1 - t) + Double(b.r) * t).rounded()),
+            g: Int((Double(a.g) * (1 - t) + Double(b.g) * t).rounded()),
+            b: Int((Double(a.b) * (1 - t) + Double(b.b) * t).rounded())
+        )
+    }
+
+    static func shiftBrightness(_ hex: String, factor: Double) -> String {
+        guard let hsb = hsb(from: hex) else { return displayHex(hex) }
+        return Self.hex(hue: hsb.h, saturation: hsb.s, brightness: min(max(hsb.b * factor, 0.08), 1))
+    }
+
+    static func applyInteriorLight(_ hex: String, _ light: InteriorLight) -> String {
+        switch light {
+        case .daylight:
+            return shiftBrightness(mix(hex, with: "#E8F2FF", amount: 0.08), factor: 1.06)
+        case .overcast:
+            return shiftBrightness(mix(hex, with: "#C5D0DC", amount: 0.16), factor: 0.88)
+        case .warmLamp:
+            return shiftBrightness(mix(hex, with: "#FFB060", amount: 0.2), factor: 0.92)
+        case .coolLamp:
+            return shiftBrightness(mix(hex, with: "#A8D8FF", amount: 0.14), factor: 1.04)
         }
     }
 
-    static func sortedByHue(_ hexes: [String]) -> [String] {
-        hexes.sorted { left, right in
-            let leftHSB = hsb(from: left)
-            let rightHSB = hsb(from: right)
-            let leftHue = leftHSB?.h ?? 0
-            let rightHue = rightHSB?.h ?? 0
-            if abs(leftHue - rightHue) < 0.0008 {
-                return (leftHSB?.s ?? 0) > (rightHSB?.s ?? 0)
+    static func applyShootLight(_ hex: String, _ light: ShootLight, role: String) -> String {
+        switch light {
+        case .kelvin5600:
+            return mix(hex, with: "#E8F2FF", amount: 0.1)
+        case .kelvin3200:
+            return mix(hex, with: "#FFB060", amount: 0.22)
+        case .mixed:
+            if role == "Fill" || role == "Backdrop" {
+                return mix(hex, with: "#A8D8FF", amount: 0.16)
             }
-            return leftHue < rightHue
+            return mix(hex, with: "#FFB060", amount: 0.2)
+        case .openShade:
+            return shiftBrightness(mix(hex, with: "#9BB8D8", amount: 0.18), factor: 0.9)
         }
     }
 
@@ -218,27 +212,8 @@ enum ColorMath {
         return abs(a.r - b.r) + abs(a.g - b.g) + abs(a.b - b.b) < threshold
     }
 
-    static func simulate(_ hex: String, mode: ColorBlindMode) -> String {
-        guard mode != .off, let rgb = rgbComponents(from: hex) else { return displayHex(hex) }
-        let r = Double(rgb.r) / 255.0
-        let g = Double(rgb.g) / 255.0
-        let b = Double(rgb.b) / 255.0
-        let mapped: (Double, Double, Double)
-        switch mode {
-        case .off:
-            mapped = (r, g, b)
-        case .protanopia:
-            mapped = (0.56667 * r + 0.43333 * g, 0.55833 * r + 0.44167 * g, 0.24167 * g + 0.75833 * b)
-        case .deuteranopia:
-            mapped = (0.625 * r + 0.375 * g, 0.7 * r + 0.3 * g, 0.3 * g + 0.7 * b)
-        case .tritanopia:
-            mapped = (0.95 * r + 0.05 * g, 0.433 * g + 0.567 * b, 0.475 * g + 0.525 * b)
-        }
-        return Self.hex(
-            r: Int((min(max(mapped.0, 0), 1) * 255).rounded()),
-            g: Int((min(max(mapped.1, 0), 1) * 255).rounded()),
-            b: Int((min(max(mapped.2, 0), 1) * 255).rounded())
-        )
+    static func brandFieldClashes(field: String, clash: String) -> Bool {
+        areSimilar(field, clash, threshold: 72)
     }
 
     static func hex(from image: UIImage, viewSize: CGSize, tap: CGPoint) -> String? {

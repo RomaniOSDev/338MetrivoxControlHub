@@ -18,6 +18,7 @@
 		467A0B7A9335329906AD22EF /* StudioBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AE3D1711430BC1356B52A /* StudioBoard.swift */; };
 		87193F7D2F666775C3EC7BDD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5315AE45C37337CF2260C17 /* SettingsView.swift */; };
 		8D8081DEF9746C956B4C915D /* CaptureBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9C1AF75F775ED125A185E /* CaptureBoard.swift */; };
+		8E4B2D01C35F7E229B6D0451 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3A1C90B24E6D118A5C9340 /* Catalog.swift */; };
 		97D20296FA2DC9E19F381A07 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98F131C920F838AA3045B7 /* Store.swift */; };
 		AFB16DFEEA82C8CA77DAADC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C88604FCE84B502B7530FB /* AppDelegate.swift */; };
 		D19FE775C97635015DF1A0B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E03B00CADCFFAEE7927A007 /* ContentView.swift */; };
@@ -40,6 +41,7 @@
 		552EA3082681BFD816EC665B /* Pods-MetrivoxControlHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetrivoxControlHub.release.xcconfig"; path = "Target Support Files/Pods-MetrivoxControlHub/Pods-MetrivoxControlHub.release.xcconfig"; sourceTree = "<group>"; };
 		599DE7A0C480F65FBF415E32 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E03B00CADCFFAEE7927A007 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7F3A1C90B24E6D118A5C9340 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		9429050AB8CC3D8B5CE045D1 /* MetrivoxControlHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetrivoxControlHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5315AE45C37337CF2260C17 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B7E41C9082AF4D6BB19E3C04 /* StatsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBoard.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		35DC3FBEDBDA2CF9EDA4EE57 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F3A1C90B24E6D118A5C9340 /* Catalog.swift */,
 				4488FB5C226502108132899D /* Models.swift */,
 			);
 			path = Models;
@@ -287,6 +290,7 @@
 				AFB16DFEEA82C8CA77DAADC1 /* AppDelegate.swift in Sources */,
 				3DC13399CAED1AE2F6FD1947 /* SceneDelegate.swift in Sources */,
 				EC629FB379946D75114FFF6D /* Models.swift in Sources */,
+				8E4B2D01C35F7E229B6D0451 /* Catalog.swift in Sources */,
 				459A1700534521A8687891A4 /* AppLinks.swift in Sources */,
 				97D20296FA2DC9E19F381A07 /* Store.swift in Sources */,
 				FA78D3E65EE847D61A7FF0E2 /* ColorMath.swift in Sources */,
@@ -322,7 +326,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zal.m3tr1v0xc0ntr0lh7b;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -461,7 +465,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zal.m3tr1v0xc0ntr0lh7b;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -55,14 +55,14 @@ struct SettingsView: View {
         }
         .preferredColorScheme(.dark)
         .tint(Theme.primary)
-        .confirmationDialog("Reset studio data?", isPresented: $confirmReset, titleVisibility: .visible) {
+        .confirmationDialog("Reset board data?", isPresented: $confirmReset, titleVisibility: .visible) {
             Button("Reset", role: .destructive) {
                 store.resetAll()
                 dismiss()
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("All palettes, recents, and capture labels will be cleared.")
+            Text("All saved rooms, mark boards, and set boards will be cleared.")
         }
     }
 

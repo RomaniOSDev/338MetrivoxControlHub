@@ -14,16 +14,16 @@ struct CaptureBoard: View {
                 if let previewImage = store.previewImage {
                     eyedropPanel(previewImage)
                 }
-                capturedPanel
-                recentsPanel
-                referencesPanel
+                rolesPanel
+                stillsPanel
             }
             .padding(16)
         }
+        .clearScrollBackground()
         .sheet(isPresented: $showPicker) {
             PhotoLibraryPicker(
                 onPicked: { image in
-                    store.ingestImage(image, label: "Imported Photo")
+                    store.ingestImage(image, label: pickerLabel)
                 },
                 onCancel: {
                     showPicker = false
@@ -32,7 +32,7 @@ struct CaptureBoard: View {
             .ignoresSafeArea()
         }
         .sheet(isPresented: $showSave) {
-            PaletteEditor(existing: nil, initialColors: saveReadyColors)
+            SaveJobSheet()
                 .environmentObject(store)
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("dataReset"))) { _ in
@@ -41,47 +41,34 @@ struct CaptureBoard: View {
         }
     }
 
-    private var saveReadyColors: [String]? {
-        let colors = store.capturedColors
-        guard (4...6).contains(colors.count) else { return nil }
-        return colors
+    private var pickerLabel: String {
+        switch store.trade {
+        case .interior: return "Wall still"
+        case .brand: return "Mark still"
+        case .shoot: return "Set still"
+        }
     }
 
     private var importPanel: some View {
         NeonPanel {
             VStack(alignment: .leading, spacing: 10) {
-                Text("CAPTURE")
+                Text(store.trade == .interior ? "WALL SAMPLE" : store.trade == .brand ? "MARK SAMPLE" : "SET SAMPLE")
                     .font(Theme.monoSmall)
                     .tracking(1.6)
                     .foregroundColor(Theme.accent)
-                Text(store.lastImageLabel.isEmpty ? "Import a still or sample a studio reference." : store.lastImageLabel)
+                Text(store.lastImageLabel.isEmpty ? sampleHint : store.lastImageLabel)
                     .font(.system(size: 16, weight: .semibold, design: .monospaced))
                     .foregroundColor(Theme.primary)
-                HStack {
-                    Text("SAMPLES")
-                        .font(Theme.monoSmall)
-                        .tracking(1.2)
-                        .foregroundColor(Theme.accent)
-                    Spacer()
-                    Text("\(store.sampleCount)")
-                        .font(Theme.mono)
-                        .foregroundColor(Theme.primary)
-                }
-                Slider(
-                    value: Binding(
-                        get: { Double(store.sampleCount) },
-                        set: { store.sampleCount = Int($0.rounded()) }
-                    ),
-                    in: 4...6,
-                    step: 1
-                )
-                .tint(Theme.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("Selected surface: \(store.selectedRole)")
+                    .font(Theme.mono)
+                    .foregroundColor(Theme.accent.opacity(0.85))
                 Button {
                     showPicker = true
                 } label: {
-                    Text("IMPORT IMAGE")
+                    Text(store.trade == .interior ? "IMPORT ROOM PHOTO" : store.trade == .brand ? "IMPORT LOCKUP" : "IMPORT SET STILL")
                         .font(.system(size: 13, weight: .bold, design: .monospaced))
-                        .tracking(1.4)
+                        .tracking(1.2)
                         .foregroundColor(Theme.background)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
@@ -92,7 +79,7 @@ struct CaptureBoard: View {
                     HStack(spacing: 8) {
                         ProgressView()
                             .tint(Theme.primary)
-                        Text("Sampling grid…")
+                        Text("Reading surfaces…")
                             .font(Theme.mono)
                             .foregroundColor(Theme.accent)
                     }
@@ -101,14 +88,25 @@ struct CaptureBoard: View {
         }
     }
 
+    private var sampleHint: String {
+        switch store.trade {
+        case .interior:
+            return "Photograph the wall next to trim and floor. Tap to fill the selected surface."
+        case .brand:
+            return "Photograph a lockup or printed mark. Tap to fill Mark, Field, or Clash."
+        case .shoot:
+            return "Photograph the set. Tap to fill Key, Fill, Backdrop, Wardrobe, or Practical."
+        }
+    }
+
     private func eyedropPanel(_ image: UIImage) -> some View {
         NeonPanel {
             VStack(alignment: .leading, spacing: 10) {
-                Text("EYEDROPPER")
+                Text("TAP TO FILL \(store.selectedRole.uppercased())")
                     .font(Theme.monoSmall)
                     .tracking(1.6)
                     .foregroundColor(Theme.accent)
-                Text("Tap the image to fill the selected swatch.")
+                Text("Pick a role below, then tap the still.")
                     .font(Theme.mono)
                     .foregroundColor(Theme.accent.opacity(0.85))
                 EyedropperCanvas(image: image) { hex in
@@ -125,131 +123,79 @@ struct CaptureBoard: View {
         }
     }
 
-    private var capturedPanel: some View {
+    private var rolesPanel: some View {
         NeonPanel {
             VStack(alignment: .leading, spacing: 12) {
-                Text("EXTRACTED")
+                Text("SURFACES")
                     .font(Theme.monoSmall)
                     .tracking(1.6)
                     .foregroundColor(Theme.accent)
-                if store.capturedColors.isEmpty {
-                    Text("No sample yet. Import a photo, tap Sample, or tap a still to pick HEX.")
-                        .font(Theme.mono)
-                        .foregroundColor(Theme.accent.opacity(0.85))
-                } else {
-                    HStack(spacing: 8) {
-                        ForEach(Array(store.capturedColors.enumerated()), id: \.offset) { index, hex in
-                            VStack(spacing: 6) {
-                                BevelTile(
-                                    hex: hex,
-                                    isSelected: index == store.selectedCaptureIndex,
-                                    corner: 8
-                                )
-                                .frame(height: 64)
-                                .onTapGesture { store.selectCapturedSlot(index) }
-                                Text(ColorMath.display(hex, format: store.preferredColorFormat))
-                                    .font(Theme.monoSmall)
-                                    .foregroundColor(Theme.accent)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.5)
-                                Text(ColorMath.colorName(hex))
-                                    .font(.system(size: 8, weight: .medium, design: .monospaced))
-                                    .foregroundColor(Theme.primary.opacity(0.8))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.5)
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    if saveReadyColors != nil {
-                        Button {
-                            showSave = true
-                        } label: {
-                            Text("SAVE PALETTE")
-                                .font(.system(size: 13, weight: .bold, design: .monospaced))
-                                .tracking(1.4)
-                                .foregroundColor(Theme.primary)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 11)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                        .stroke(Theme.neonStroke, lineWidth: 1)
-                                )
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-            }
-        }
-    }
-
-    private var recentsPanel: some View {
-        NeonPanel {
-            VStack(alignment: .leading, spacing: 12) {
-                Text("RECENTS")
-                    .font(Theme.monoSmall)
-                    .tracking(1.6)
-                    .foregroundColor(Theme.accent)
-                if store.savedPalettes.isEmpty && store.recentColors.isEmpty {
-                    Text("Saved palettes appear here after you store a strip.")
-                        .font(Theme.mono)
-                        .foregroundColor(Theme.accent.opacity(0.85))
-                } else {
-                    ForEach(Array(store.savedPalettes.prefix(4))) { palette in
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(palette.name)
+                HStack(spacing: 8) {
+                    ForEach(Array(store.workingSurfaces.enumerated()), id: \.element.id) { index, surface in
+                        VStack(spacing: 6) {
+                            BevelTile(
+                                hex: surface.hex,
+                                isSelected: index == store.selectedRoleIndex,
+                                corner: 8
+                            )
+                            .frame(height: 56)
+                            .onTapGesture { store.selectRole(index) }
+                            Text(surface.role.uppercased())
+                                .font(.system(size: 8, weight: .bold, design: .monospaced))
+                                .foregroundColor(surface.role == "Clash" ? Theme.primary : Theme.accent)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.55)
+                            Text(ColorMath.display(surface.hex, format: store.preferredColorFormat))
                                 .font(Theme.monoSmall)
-                                .foregroundColor(Theme.primary)
-                            SwatchStrip(colors: palette.colors, height: 36) { hex in
-                                store.selectColor(hex)
-                            }
+                                .foregroundColor(Theme.accent)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
                         }
-                    }
-                    if !store.recentColors.isEmpty {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 8) {
-                                ForEach(Array(store.recentColors.prefix(12).enumerated()), id: \.offset) { _, hex in
-                                    BevelTile(hex: hex, isSelected: ColorMath.displayHex(hex) == store.selectedDisplay, corner: 8)
-                                        .frame(width: 32, height: 32)
-                                        .onTapGesture { store.selectColor(hex) }
-                                }
-                            }
-                        }
+                        .frame(maxWidth: .infinity)
                     }
                 }
+                Button {
+                    showSave = true
+                } label: {
+                    Text("SAVE BOARD")
+                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                        .tracking(1.4)
+                        .foregroundColor(Theme.primary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 11)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .stroke(Theme.neonStroke, lineWidth: 1)
+                        )
+                }
+                .buttonStyle(.plain)
             }
         }
     }
 
-    private var referencesPanel: some View {
+    private var stillsPanel: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("STUDIO REFERENCES")
+            Text("PRACTICE STILLS")
                 .font(Theme.monoSmall)
                 .tracking(1.6)
                 .foregroundColor(Theme.accent)
                 .padding(.horizontal, 4)
-            ForEach(StudioCatalog.references) { reference in
+            ForEach(StudioCatalog.practiceStills.filter { $0.trade == store.trade }) { still in
                 VStack(alignment: .leading, spacing: 8) {
                     ZStack(alignment: .bottomTrailing) {
-                        if let image = UIImage(named: reference.imageName) {
+                        if let image = UIImage(named: still.imageName) {
                             EyedropperCanvas(image: image) { hex in
                                 store.previewImage = image
-                                store.lastImageLabel = reference.label
+                                store.lastImageLabel = still.label
                                 store.applyEyedrop(hex)
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 132)
-                        } else {
-                            Image(reference.imageName)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 132)
                         }
                         Button {
-                            store.sampleBundledImage(named: reference.imageName, label: reference.label)
+                            store.sampleBundledImage(named: still.imageName, label: still.label)
                         } label: {
-                            Text("Sample")
+                            Text("Read")
                                 .font(.system(size: 12, weight: .bold, design: .monospaced))
                                 .foregroundColor(Theme.background)
                                 .padding(.horizontal, 12)
@@ -264,7 +210,7 @@ struct CaptureBoard: View {
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                             .stroke(Theme.neonStroke, lineWidth: 1)
                     )
-                    Text(reference.label)
+                    Text(still.label)
                         .font(Theme.mono)
                         .foregroundColor(Theme.primary)
                 }

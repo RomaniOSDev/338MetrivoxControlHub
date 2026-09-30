@@ -219,6 +219,11 @@ extension View {
     func dismissKeyboardOnTap() -> some View {
         background(KeyboardDismissInstaller())
     }
+
+    func clearScrollBackground() -> some View {
+        scrollContentBackground(.hidden)
+            .background(Color.clear)
+    }
 }
 
 private struct KeyboardDismissInstaller: UIViewRepresentable {

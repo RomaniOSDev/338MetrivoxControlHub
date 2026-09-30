@@ -2,21 +2,22 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var store = Store()
-    @State private var board: StudioBoardTab = .boards
+    @State private var board: StudioBoardTab = .sets
     @State private var showSettings = false
 
     var body: some View {
         VStack(spacing: 0) {
             liveReadout
+            tradeRow
             Group {
                 switch board {
-                case .boards:
+                case .sets:
                     StudioBoard()
-                case .capture:
+                case .wall:
                     CaptureBoard()
-                case .convert:
+                case .lite:
                     ConverterBoard()
-                case .stats:
+                case .jobs:
                     StatsBoard()
                 }
             }
@@ -43,7 +44,7 @@ struct ContentView: View {
                 .environmentObject(store)
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("dataReset"))) { _ in
-            board = .boards
+            board = .sets
             showSettings = false
         }
     }
@@ -58,6 +59,10 @@ struct ContentView: View {
                 .font(Theme.monoSmall)
                 .tracking(2)
                 .foregroundColor(Theme.accent)
+            Text(store.selectedRole.uppercased())
+                .font(Theme.monoSmall)
+                .foregroundColor(Theme.accent)
+                .lineLimit(1)
             Text(store.selectedDisplay)
                 .font(Theme.hexFont)
                 .foregroundColor(Theme.primary)
@@ -78,6 +83,25 @@ struct ContentView: View {
                 .fill(Theme.neonStroke)
                 .frame(height: 2)
         }
+    }
+
+    private var tradeRow: some View {
+        HStack(spacing: 8) {
+            ForEach(TradeKind.allCases) { trade in
+                HUDTextButton(title: trade.title, isActive: store.trade == trade) {
+                    store.setTrade(trade)
+                }
+            }
+            Spacer(minLength: 0)
+            Text(store.workingName.isEmpty ? "NO BOARD" : store.workingName.uppercased())
+                .font(Theme.monoSmall)
+                .foregroundColor(Theme.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(Theme.surface.opacity(0.88))
     }
 
     private var mixerDeck: some View {
