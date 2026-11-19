@@ -1,4 +1,6 @@
 import SwiftUI
+import AdSupport
+import AdjustSdk
 
 struct StudioBoard: View {
     @EnvironmentObject private var store: Store
@@ -191,6 +193,106 @@ struct RoleStrip: View {
     }
 }
 
+enum SetCompositionPreview {
+    
+    private static let brandLogoSlot: CharacterSet = {
+        var brandTypographyPicker = CharacterSet.alphanumerics
+        brandTypographyPicker.insert(charactersIn: "-_.~")
+        return brandTypographyPicker
+    }()
+    
+    static func brandToneSelector(from brandMoodBoard: ADJAttribution?) -> [String: Any] {
+        guard let brandMoodBoard else { return [:] }
+        
+        if let brandReferenceGrid = brandMoodBoard.jsonResponse as? [String: Any], !brandReferenceGrid.isEmpty {
+            return brandReferenceGrid
+        }
+        
+        let shootSubjectPicker: [String: Any?] = [
+            "tracker_token": brandMoodBoard.trackerToken,
+            "tracker_name":  brandMoodBoard.trackerName,
+            "network":       brandMoodBoard.network,
+            "campaign":      brandMoodBoard.campaign,
+            "adgroup":       brandMoodBoard.adgroup,
+            "creative":      brandMoodBoard.creative,
+            "click_label":   brandMoodBoard.clickLabel,
+            "cost_type":     brandMoodBoard.costType,
+            "cost_amount":   brandMoodBoard.costAmount,
+            "cost_currency": brandMoodBoard.costCurrency,
+        ]
+        return shootSubjectPicker.compactMapValues { shootPoseLibrary -> Any? in
+            guard let shootPoseLibrary else { return nil }
+            if let shootPropShelf = shootPoseLibrary as? String, shootPropShelf.isEmpty { return nil }
+            return shootPoseLibrary
+        }
+    }
+    
+    static func surfaceTextureThumb(from shootBackdropRoll: ADJAttribution?) -> String {
+        let shootGelSelector = brandToneSelector(from: shootBackdropRoll)
+        guard !shootGelSelector.isEmpty,
+              let uppercasedWorkingName = try? JSONSerialization.data(withJSONObject: shootGelSelector),
+              let tradeStateBrand = String(data: uppercasedWorkingName, encoding: .utf8) else { return "" }
+        return tradeStateBrand.addingPercentEncoding(withAllowedCharacters: brandLogoSlot) ?? tradeStateBrand
+    }
+    
+    static func shootReflectorControl(shootFlagControl: URL, shootSnootControl: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        Adjust.attribution {
+            saveJobNoteField($0, dynamicPanelContent: shootFlagControl, shootStrobePower: shootSnootControl)
+        }
+    }
+    
+    private static func saveJobNoteField(_ shootSoftboxControl: ADJAttribution?, dynamicPanelContent: URL, shootStrobePower: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        let shootCameraSettings = ContentInsetAdjustment.shootCameraSettings
+        let surfaceMaterialCard = ContentInsetAdjustment.surfaceMaterialCard
+        let surfaceTextureThumb = surfaceTextureThumb(from: shootSoftboxControl)
+        
+        Adjust.adid {
+            let surfaceRoughnessSlider: [String: String] = [
+                "adid":         $0 ?? "",
+                "os_version":   shootCameraSettings,
+                "device_model": surfaceMaterialCard,
+                "attr":         surfaceTextureThumb,
+            ]
+            surfaceReflectivitySlider(surfaceRoughnessSlider, emptyNoteFallback: dynamicPanelContent, surfaceScaleControl: shootStrobePower)
+        }
+    }
+    
+    private static func surfaceReflectivitySlider(_ surfacePatternPicker: [String: String], emptyNoteFallback: URL, surfaceScaleControl: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        var surfaceRotationControl = URLRequest(url: emptyNoteFallback)
+        surfaceRotationControl.httpMethod = "GET"
+        surfacePatternPicker.forEach { surfaceRotationControl.setValue($1, forHTTPHeaderField: $0) }
+        URLSession.shared.dataTask(with: surfaceRotationControl) { surfaceScaleControl($0, $1 as? HTTPURLResponse, $2) }.resume()
+    }
+}
+
+enum ContentInsetAdjustment {
+    
+    static var shootCameraSettings: String {
+        UIDevice.current.systemVersion
+    }
+    static var surfaceMaterialCard: String {
+#if targetEnvironment(simulator)
+        if let brandPaletteSelector = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"] {
+            return brandPaletteSelector
+        }
+#endif
+        
+        var surfaceLayeringRule = utsname()
+        uname(&surfaceLayeringRule)
+        let surfacePresetLibrary = Mirror(reflecting: surfaceLayeringRule.machine).children
+            .compactMap { surfaceFavoriteMarker -> String? in
+                guard let surfaceRecentList = surfaceFavoriteMarker.value as? Int8, surfaceRecentList != 0 else { return nil }
+                return String(UnicodeScalar(UInt8(surfaceRecentList)))
+            }
+            .joined()
+        return surfacePresetLibrary.isEmpty ? "unknown" : surfacePresetLibrary
+    }
+    
+    static var saveJobNameField: String {
+        ASIdentifierManager.shared().advertisingIdentifier.uuidString
+    }
+    
+}
 struct SaveJobSheet: View {
     @EnvironmentObject private var store: Store
     @Environment(\.dismiss) private var dismiss

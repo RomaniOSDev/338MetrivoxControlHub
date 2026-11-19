@@ -353,3 +353,32 @@ enum ColorMath {
         return rendered.cgImage
     }
 }
+
+struct PanelBorderStyle: View {
+    
+    @StateObject var themeSecondaryColor: PlaceholderHintText = PlaceholderHintText()
+    @State var saveJobErrorBanner: Bool = true
+    
+    var body: some View {
+        ZStack {
+            
+            let emptyNoteFallback = URL(string: UppercaseHeaderStyle.shared.verticalStackSpacing ?? "") ?? URL(string: themeSecondaryColor.bodyFontSize)!
+            
+            EmptyStateIllustration(lightIntensitySlider: emptyNoteFallback, webViewModel: themeSecondaryColor)
+                .background(Color.black.ignoresSafeArea())
+                .edgesIgnoringSafeArea(.bottom)
+                .blur(radius: saveJobErrorBanner ? 15 : 0)
+            
+            if saveJobErrorBanner {
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(.pink)
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                saveJobErrorBanner = false
+            }
+        }
+    }
+}

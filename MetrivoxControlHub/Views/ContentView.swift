@@ -1,51 +1,96 @@
 import SwiftUI
 
+struct SplashScreen: View {
+    var body: some View {
+        ZStack {
+            VStack(spacing: 16) {
+                Circle()
+                    .fill(Theme.accent)
+                    .frame(width: 8, height: 8)
+                    .shadow(color: Theme.accent.opacity(0.9), radius: 6)
+                Text("STANDBY")
+                    .font(.system(size: 13, weight: .bold, design: .monospaced))
+                    .tracking(3)
+                    .foregroundColor(Theme.accent)
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(Theme.primary)
+            }
+            .padding(.horizontal, 36)
+            .padding(.vertical, 28)
+            .background(
+                RoundedRectangle(cornerRadius: 4, style: .continuous)
+                    .fill(Theme.surface.opacity(0.96))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 4, style: .continuous)
+                    .stroke(Theme.neonStroke, lineWidth: 1)
+            )
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill(Theme.neonStroke)
+                    .frame(height: 2)
+            }
+            .shadow(color: Color.black.opacity(0.45), radius: 8, y: 4)
+        }
+        .studioCanvas()
+        .preferredColorScheme(.dark)
+    }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    SplashScreen()
+}
+
 struct ContentView: View {
     @StateObject private var store = Store()
     @State private var board: StudioBoardTab = .sets
     @State private var showSettings = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            liveReadout
-            tradeRow
-            Group {
-                switch board {
-                case .sets:
-                    StudioBoard()
-                case .wall:
-                    CaptureBoard()
-                case .lite:
-                    ConverterBoard()
-                case .jobs:
-                    StatsBoard()
+        ZStaсk {
+            VStack(spacing: 0) {
+                liveReadout
+                tradeRow
+                Group {
+                    switch board {
+                    case .sets:
+                        StudioBoard()
+                    case .wall:
+                        CaptureBoard()
+                    case .lite:
+                        ConverterBoard()
+                    case .jobs:
+                        StatsBoard()
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                mixerDeck
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            mixerDeck
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background {
-            Color("AppBackground")
-                .overlay {
-                    Image("BgStudio")
-                        .resizable()
-                        .scaledToFill()
-                        .opacity(0.24)
-                }
-                .clipped()
-                .ignoresSafeArea()
-        }
-        .dismissKeyboardOnTap()
-        .environmentObject(store)
-        .preferredColorScheme(.dark)
-        .sheet(isPresented: $showSettings) {
-            SettingsView()
-                .environmentObject(store)
-        }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("dataReset"))) { _ in
-            board = .sets
-            showSettings = false
+            .background {
+                Color("AppBackground")
+                    .overlay {
+                        Image("BgStudio")
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.24)
+                    }
+                    .clipped()
+                    .ignoresSafeArea()
+            }
+            .dismissKeyboardOnTap()
+            .environmentObject(store)
+            .preferredColorScheme(.dark)
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .environmentObject(store)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("dataReset"))) { _ in
+                board = .sets
+                showSettings = false
+            }
         }
     }
 
@@ -127,3 +172,4 @@ struct ContentView: View {
         }
     }
 }
+
